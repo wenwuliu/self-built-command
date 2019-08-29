@@ -17,4 +17,5 @@ if [ "t$is_script_exist" = "t" ];then
 	cat loadSS.sh>>~/$shell_rc
 fi
 
-cp -r .self-built-command ~/
+
+cp -r .self-built-command ~/ >>/dev/null
