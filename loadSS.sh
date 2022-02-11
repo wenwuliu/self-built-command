@@ -1,25 +1,28 @@
 #load self built command
-alias sudo="sudo "
+commandPath=~/.self-built-command
 
-selfBuiltPath=~/.self-built-command
-
-loadSHFile(){
-	for file in `ls $1`;do
-		fp=$1/$file
-		suf=${file##*.}
-		if [ -f $fp ] && ( [ $suf = "sh" ] || [ $suf = "zsh" ] );then
-			alias ${file%.*}=$fp
-		elif [ -d $fp ];then
-			loadSHFile $fp
-		fi
-	done
-
-}
-
-if [ ! -e $selfBuiltPath ];then
-	mkdir $selfBuiltPath
-elif [ -f $selfBuiltPath ];then
-	echo "$selfBuiltPath should be a directory"
+if [ ! -e $commandPath ];then
+        mkdir $commandPath
 fi
 
-loadSHFile $selfBuiltPath
+autoLoad(){
+        for file in `ls $1`;do
+                fp=$1/$file
+                suffix=`echo ${file##*.}`
+                if [ -f $fp ] && ( [ $suffix = "sh" ] || [ $suffix = "zsh" ] );then
+                        alias `echo ${file%.*}`=$fp
+                elif [ -f $fp ] && [ $suffix = "py" ];then
+                        alias `echo ${file%.*}`="python3 $fp"
+                elif [ -f $fp ] && [ $suffix = "pybn" ];then
+                        alias `echo ${file%.*}`=$fp
+                elif [ -d $fp ];then
+                        autoLoad $fp
+                fi
+        done
+}
+
+if [ ! -d $commandPath ];then
+        echo "$commandPath is not a directory"
+else
+        autoLoad $commandPath
+fi

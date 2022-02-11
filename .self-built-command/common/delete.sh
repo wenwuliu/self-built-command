@@ -18,6 +18,11 @@ elif [ ! -d $garbage ];then
 	exit 1
 fi
 
+if [ $# -eq 0 ];then
+	echo "please input the object name"
+	exit 1
+fi
+
 
 if [ ! -e $1 ];then
 	echo "file or directory not exist"

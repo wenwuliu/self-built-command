@@ -4,14 +4,15 @@
 # create date:2019-08-29 09:54:41
 
 shell_name=${SHELL##*/}
+selfBuiltPath=~/.self-built-command
 
 if [ $shell_name = "zsh" ];then
 	shell_rc=".zshrc"
-elif [ $shell_name = "zsh" ];then
+elif [ $shell_name = "bash" ];then
 	shell_rc=".bashrc"
 fi
 
-is_script_exist=`cat ~/$shell_rc | grep selfBuiltPath`
+is_script_exist=`cat ~/$shell_rc | grep $selfBuiltPath`
 
 if [ "t$is_script_exist" = "t" ];then
 	cat loadSS.sh>>~/$shell_rc
