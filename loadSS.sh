@@ -1,4 +1,5 @@
 #load self built command
+# version: v1.1.1
 commandPath="$HOME/.self-built-command"
 
 # Create directory if it doesn't exist

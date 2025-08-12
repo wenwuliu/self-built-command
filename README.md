@@ -188,5 +188,20 @@ screenConnect --help
 ## 📊 Version History
 
 - **v1.0** - Initial release with basic functionality
-- **v2.0** - Added security improvements and error handling
-- **v2.1** - Enhanced documentation and uninstall script
+- **v1.1.0** - Added security improvements and error handling
+- **v1.1.1** - Fixed debug output issues and improved performance with version management system
+
+## 🔄 Version Management
+
+The project now includes an intelligent version management system:
+
+- **Automatic Detection**: Installation script detects existing configuration versions
+- **Smart Updates**: Only prompts for updates when necessary
+- **Safe Upgrades**: Creates backups before updating configurations
+- **Version Tracking**: Each configuration includes version information for future updates
+
+### Checking Your Version
+Your current configuration version is shown during installation. You can also check manually:
+```bash
+grep -A 1 "load self built command" ~/.bashrc  # or ~/.zshrc
+```
