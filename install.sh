@@ -70,6 +70,25 @@ if [ "$has_config" = false ]; then
     echo "Adding self-built-command to $shell_rc..."
     echo "" >> "$HOME/$shell_rc"  # Add newline for safety
     cat loadSS.sh >> "$HOME/$shell_rc"
+    
+    # 创建并配置 AppImage Desktop Manager 的自启动
+    mkdir -p "$HOME/.config/autostart"
+    cat > "$HOME/.config/autostart/appimage-desktop-manager.desktop" << EOL
+[Desktop Entry]
+Type=Application
+Name=AppImage Desktop Manager
+Exec=$selfBuiltPath/appimage-desktop-manager.sh
+Icon=system-run
+Comment=管理 AppImage 应用程序的桌面快捷方式
+Categories=System;
+X-GNOME-Autostart-enabled=true
+EOL
+    
+    # 复制 AppImage Desktop Manager 脚本到安装目录
+    mkdir -p "$selfBuiltPath"
+    cp "appimage-desktop-manager.sh" "$selfBuiltPath/"
+    chmod +x "$selfBuiltPath/appimage-desktop-manager.sh"
+    
     echo "Configuration added to $shell_rc (version $CURRENT_VERSION)"
 elif [ "$needs_update" = true ]; then
     # Update configuration
